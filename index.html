@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Council Online</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>Hidden Council Online</h1>
+        <p class="subtitle">لعبة Browser Social Deduction مستوحاة من الفكرة العامة لـ Secret Hitler</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="leaveRoomBtn" class="ghost hidden">خروج من الغرفة</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel" id="setupPanel">
+        <h2>الدخول</h2>
+        <label>اسمك
+          <input id="nicknameInput" type="text" maxlength="18" placeholder="اكتب اسمك" />
+        </label>
+        <div class="room-actions">
+          <button id="createRoomBtn">إنشاء غرفة</button>
+          <div class="join-box">
+            <input id="roomCodeInput" type="text" maxlength="6" placeholder="ROOM" />
+            <button id="joinRoomBtn">دخول غرفة</button>
+          </div>
+        </div>
+        <p class="hint">المشروع يحتاج Firebase. ضع بياناتك في <code>js/firebase-config.js</code>.</p>
+        <div id="connectionStatus" class="status-pill offline">غير متصل</div>
+      </section>
+
+      <section class="panel hidden" id="lobbyPanel">
+        <div class="panel-head">
+          <h2>الغرفة <span id="roomCodeLabel"></span></h2>
+          <span id="hostBadge" class="badge hidden">Host</span>
+        </div>
+        <div class="lobby-grid">
+          <div>
+            <h3>اللاعبون</h3>
+            <ul id="playersList" class="players-list"></ul>
+          </div>
+          <div>
+            <h3>إعدادات الجولة</h3>
+            <label>عدد اللاعبين المطلوب
+              <select id="targetPlayersSelect">
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </label>
+            <button id="startGameBtn">ابدأ اللعبة</button>
+            <p class="hint">ابدأ بعد اكتمال العدد المطلوب.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="gamePanel">
+        <div class="game-grid">
+          <div>
+            <h2>حالتك</h2>
+            <div id="myRoleCard" class="role-card waiting">
+              <div class="role-title">لم تبدأ الجولة بعد</div>
+              <div class="role-body">...</div>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <span>President</span>
+                <strong id="presidentLabel">-</strong>
+              </div>
+              <div class="stat-box">
+                <span>Chancellor</span>
+                <strong id="chancellorLabel">-</strong>
+              </div>
+              <div class="stat-box">
+                <span>Liberal Laws</span>
+                <strong id="liberalCountLabel">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Authoritarian Laws</span>
+                <strong id="fascistCountLabel">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Election Tracker</span>
+                <strong id="electionTrackerLabel">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Deck</span>
+                <strong id="deckCountLabel">0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2>المرحلة الحالية</h2>
+            <div id="phaseCard" class="phase-card">في انتظار اللعبة...</div>
+            <div id="actionArea" class="action-stack"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="logPanel">
+        <h2>سجل الأحداث</h2>
+        <div id="logList" class="log-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
